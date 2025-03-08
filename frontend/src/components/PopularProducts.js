@@ -2,17 +2,17 @@ import { Link } from 'react-router-dom'
 import { FaHeart, FaSearch } from 'react-icons/fa'
 import { useGetAllproductsQuery } from '../slices/productApiSlice'
 import { useState } from 'react'
-import Error from '../components/Error'
-import Loading from '../components/Loading'
-import Rating from '../components/Rating'
+import Error from './Error'
+import Loading from './Loading'
+import Rating from './Rating'
 
-const ProductCollection = ({ keyword }) => {
-  // Receive the keyword as a prop
+const PopularProducts = () => {
+  const [keyword] = useState('') // You can update the keyword if needed
   const {
     data: productsData,
     error,
     isLoading: loading,
-  } = useGetAllproductsQuery({ keyword }) // Pass the keyword to the query
+  } = useGetAllproductsQuery({ keyword, sortBy: 'popular' }) // Pass sortBy for popular products
 
   console.log(productsData)
 
@@ -28,12 +28,7 @@ const ProductCollection = ({ keyword }) => {
 
   return (
     <div className='product-collection section-center'>
-      {keyword && (
-        <Link to='/' className='btn-back'>
-          Go Back
-        </Link>
-      )}
-      <h2>Products collection</h2>
+      <h2>Popular Products</h2>
       <div className='product-grid'>
         {productsData?.products?.map((product) => (
           <div key={product._id} className='product-card'>
@@ -75,4 +70,4 @@ const ProductCollection = ({ keyword }) => {
   )
 }
 
-export default ProductCollection
+export default PopularProducts
