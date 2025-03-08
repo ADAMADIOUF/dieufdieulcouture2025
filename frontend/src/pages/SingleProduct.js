@@ -8,6 +8,7 @@ import TabSingleProduct from '../components/TabSingleProduct'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../slices/cartSlice'
 import { FaMinus, FaPlus } from 'react-icons/fa'
+import FormatCurrency from '../components/FormatCurrency'
 
 const SingleProduct = () => {
   const [qty, setQty] = useState(1)
@@ -97,8 +98,11 @@ const SingleProduct = () => {
           <p className='category'>{category}</p>
 
           <div className='price'>
-            <span className='current-price'>${price}</span>
-            {Oldprice && <span className='old-price'>${Oldprice}</span>}
+            <p className='old-price'>{
+    FormatCurrency(product.Oldprice)}</p>
+
+<p className='new-price'>{FormatCurrency(product.price)}</p>
+            
           </div>
           <Rating value={product.rating} text={`${product.numReviews} Avis`} />
           <p className='description'>

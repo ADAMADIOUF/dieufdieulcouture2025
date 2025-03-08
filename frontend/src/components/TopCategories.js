@@ -42,29 +42,40 @@ const categories = [
 
 const TopCategories = () => {
   return (
-    <div className='categories-container section-center'>
-      {categories.map((category) => (
-        <div
-          key={category.id}
-          className='category-card'
-          style={{ backgroundColor: category.bgColor }}
-        >
-          <img
-            src={category.image}
-            alt={category.title}
-            className='category-image'
-          />
-          <div className='category-content'>
-            <h2 className='category-title'>{category.title}</h2>
-            <p className='category-text'>{category.text}</p>
-            <div className='category-button'>
-              <Link to={category.link} className='category-link'>
-                Voir Plus
-              </Link>
+    <div className='section-center'>
+      <div className='boutique-container'>
+        <h2>Boutique de Vêtements</h2>
+        <h3>Dieuf Dieul Couture</h3>
+        <p>
+          Découvrez nos créations uniques et élégantes, parfaites pour toutes
+          les occasions.
+        </p>
+      </div>
+
+      <div className='categories-container '>
+        {categories.map((category) => (
+          <div
+            key={category.id}
+            className='category-card'
+            style={{ backgroundColor: category.bgColor }}
+          >
+            <img
+              src={category.image}
+              alt={category.title}
+              className='category-image'
+            />
+            <div className='category-content'>
+              <h2 className='category-title'>{category.title}</h2>
+              <p className='category-text'>{category.text}</p>
+              <div className='category-button'>
+                <Link to={category.link} className='category-link'>
+                  Voir Plus
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

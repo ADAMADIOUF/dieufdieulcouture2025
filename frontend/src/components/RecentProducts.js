@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
 import Rating from '../components/Rating'
+import FormatCurrency from './FormatCurrency'
 
 const RecentProducts = () => {
   const [keyword] = useState('') // You can update the keyword if needed
@@ -28,7 +29,7 @@ const RecentProducts = () => {
 
   return (
     <div className='product-collection section-center'>
-      <h2>Recent Products</h2>
+      <h2>Produits Récents</h2>
       <div className='product-grid'>
         {productsData?.products?.map((product) => (
           <div key={product._id} className='product-card'>
@@ -54,10 +55,10 @@ const RecentProducts = () => {
             </div>
             <div className='product-details'>
               <h3>{product.name}</h3>
-              {product.Oldprice && (
-                <p className='old-price'>${product.Oldprice}</p>
-              )}
-              <p className='new-price'>${product.price}</p>
+              <p className='old-price'>{
+    FormatCurrency(product.Oldprice)}</p>
+
+<p className='new-price'>{FormatCurrency(product.price)}</p>
               <Rating
                 value={product.rating}
                 text={`${product.numReviews} reviews`}

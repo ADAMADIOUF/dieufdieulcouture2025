@@ -1,13 +1,16 @@
 import asyncHandler from '../middleware/asyncHandler.js'
 import Product from '../models/Product.js'
 const getAllProducts = asyncHandler(async (req, res) => {
+  // Search by keyword (case-insensitive search)
   const keyword = req.query.keyword
     ? { name: { $regex: req.query.keyword, $options: 'i' } }
     : {}
 
+  // Filters for category, subcategory, rating, stock, price, size, and color
   const filters = {
     ...keyword,
     ...(req.query.category ? { category: req.query.category } : {}),
+    ...(req.query.subcategory ? { subcategory: req.query.subcategory } : {}),  // Added subcategory filter
     ...(req.query.rating ? { rating: { $gte: req.query.rating } } : {}),
     ...(req.query.inStock === 'true' ? { countInStock: { $gt: 0 } } : {}),
     ...(req.query.inStock === 'false' ? { countInStock: { $eq: 0 } } : {}),
@@ -17,23 +20,38 @@ const getAllProducts = asyncHandler(async (req, res) => {
     ...(req.query.color ? { colors: { $in: req.query.color.split(',') } } : {}),
   }
 
+  // Sorting logic
   let sortOptions = {}
   if (req.query.sortBy) {
-    sortOptions =
-      req.query.sortBy === 'priceAsc'
-        ? { price: 1 }
-        : req.query.sortBy === 'priceDesc'
-        ? { price: -1 }
-        : req.query.sortBy === 'recent' // For sorting by most recent products
-        ? { createdAt: -1 }
-        : req.query.sortBy === 'popular' // Sort by rating or numReviews for popular products
-        ? { rating: -1 } // Or you could use numReviews if you prefer
-        : { rating: -1 }
+    switch (req.query.sortBy) {
+      case 'priceAsc':
+        sortOptions = { price: 1 }
+        break
+      case 'priceDesc':
+        sortOptions = { price: -1 }
+        break
+      case 'recent':
+        sortOptions = { createdAt: -1 }
+        break
+      case 'popular':
+        sortOptions = { rating: -1 } // Alternatively, you could use numReviews here
+        break
+      default:
+        sortOptions = { rating: -1 }
+        break
+    }
   } else {
-    sortOptions = { createdAt: -1 } // Default to sorting by most recent
+    // Default sorting by most recent products
+    sortOptions = { createdAt: -1 }
   }
 
+  // Find products based on filters and sort options
   const products = await Product.find(filters).sort(sortOptions)
+
+  // If no products match the filters, send an empty array
+  if (!products.length) {
+    return res.json({ products: [] })
+  }
 
   res.json({ products })
 })
@@ -98,11 +116,12 @@ const createProduct = asyncHandler(async (req, res) => {
   const product = await new Product({
     name: 'Sample name',
     price: 0,
+    
     user: req.user._id,
-    images: ['/images/sample.jpg', '/images/sample.jpg'],
+    images: ['https://i.pinimg.com/474x/67/10/b8/6710b8a71d696dcf3e91b4cfba4bf089.jpg', 'https://i.pinimg.com/474x/a0/eb/6f/a0eb6f8698dc013ea602026effbc73f2.jpg'],
     brand: 'sample brand',
-    category: 'sample category',
-    subcategory: 'Kids',
+    category: 'clothing',
+    subcategory: 'women',
     countInStock: 0,
     numReviews: 0,
     description: 'sample description',

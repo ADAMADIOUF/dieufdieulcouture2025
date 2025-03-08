@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useGetAllproductsQuery } from '../slices/productApiSlice'
 import { Link } from 'react-router-dom'
 import { FaTh, FaThList } from 'react-icons/fa'
+import FormatCurrency from '../components/FormatCurrency'
+import Rating from '../components/Rating'
 
 const Shop = () => {
   const [keyword] = useState('')
   const [sortOption, setSortOption] = useState('')
   const [category, setCategory] = useState('')
+  const [subcategory, setSubcategory] = useState('') // New state for subcategory
   const [inStock, setInStock] = useState('')
   const [minPrice, setMinPrice] = useState(0)
   const [maxPrice, setMaxPrice] = useState(100)
@@ -22,6 +25,7 @@ const Shop = () => {
   } = useGetAllproductsQuery({
     keyword,
     category,
+    subcategory, // Include subcategory in the query
     sortBy: sortOption,
     minPrice,
     maxPrice,
@@ -60,6 +64,15 @@ const Shop = () => {
         ? prev.filter((size) => size !== sizeOption)
         : [...prev, sizeOption]
     )
+  }
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value)
+    setSubcategory('') // Reset subcategory when category changes
+  }
+
+  const handleSubcategoryChange = (e) => {
+    setSubcategory(e.target.value)
   }
 
   return (
@@ -131,7 +144,7 @@ const Shop = () => {
           <h4>Filtrer par Catégorie</h4>
           <label>
             Catégorie :
-            <select onChange={(e) => setCategory(e.target.value)}>
+            <select onChange={handleCategoryChange}>
               <option value=''>Toutes les Catégories</option>
               <option value='clothing'>Vêtements</option>
               <option value='shoes'>Chaussures</option>
@@ -140,6 +153,29 @@ const Shop = () => {
             </select>
           </label>
         </article>
+
+        {/* Filter by Subcategory (dynamically based on the selected category) */}
+        {category && (
+          <article>
+            <h4>Filtrer par Sous-catégorie</h4>
+            <select onChange={handleSubcategoryChange}>
+              <option value=''>Toutes les Sous-catégories</option>
+              {category === 'clothing' && (
+                <>
+                  <option value='shirts'>Shirts</option>
+                  <option value='pants'>Pants</option>
+                </>
+              )}
+              {category === 'shoes' && (
+                <>
+                  <option value='sneakers'>Sneakers</option>
+                  <option value='boots'>Boots</option>
+                </>
+              )}
+              {/* Add more subcategory options for other categories */}
+            </select>
+          </article>
+        )}
 
         <article>
           <h4>Filtrer par Évaluation</h4>
@@ -216,8 +252,10 @@ const Shop = () => {
                   )}
                 </Link>
                 <h5>{product.name.substring(0, 25)}</h5>
-                <p>Price: ${product.price}</p>
-                <p>Rating: {product.rating} Stars</p>
+                <p className='old-price'>{FormatCurrency(product.Oldprice)}</p>
+
+                <p className='new-price'>{FormatCurrency(product.price)}</p>
+                <Rating value={product.rating} text={`${product.numReviews} Avis`} />
                 <p>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</p>
               </div>
             ))}

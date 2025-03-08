@@ -9,11 +9,9 @@ const CartButton = () => {
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
 
   return (
-    <Link to="/cart" className="cart-button">
-      <FaShoppingCart /> Cart
-      {totalItems > 0 && (
-        <span className="cart-badge">{totalItems}</span>  
-      )}
+    <Link to='/cart' className='cart-button'>
+      <FaShoppingCart className='cart-icon' /> <span>Panier</span>
+      {totalItems > 0 && <span className='cart-badge'>{totalItems}</span>}
     </Link>
   )
 }

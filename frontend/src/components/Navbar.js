@@ -43,7 +43,8 @@ const Navbar = () => {
       <div className='navbar-container'>
         <div className='navbar-logo '>
           <Link to='/'>
-          <img src={logo} alt="" /></Link>
+            <img src={logo} alt='' />
+          </Link>
         </div>
 
         <div className='navbar-menu-desktop no-wrap'>
@@ -65,7 +66,7 @@ const Navbar = () => {
           <Link to='/enfants' className='nav-link'>
             Enfants
           </Link>
-          
+
           <Link to='/contact' className='nav-link'>
             Contact
           </Link>
@@ -83,20 +84,20 @@ const Navbar = () => {
             {dropdownOpen && (
               <div className='dropdown-user no-wrap'>
                 <Link to='/profile' className='dropdown-item'>
-                  <FaUser /> Profile
+                  <FaUser /> Profil
                 </Link>
                 <Link to='/wishlist' className='dropdown-item'>
-                  <FaHeart /> Wishlist
+                  <FaHeart /> Liste de souhaits
                 </Link>
                 <button onClick={logoutHandler} className='dropdown-item'>
-                  Logout
+                  Déconnexion
                 </button>
               </div>
             )}
           </div>
         ) : (
           <Link to='/login' className='nav-button'>
-            <FaUser /> Sign In
+            <FaUser /> Se connecter
           </Link>
         )}
       </div>
@@ -120,7 +121,7 @@ const Navbar = () => {
         <Link to='/enfants' className='nav-link' onClick={toggleMenu}>
           Enfants
         </Link>
-       
+
         <Link to='/contact' className='nav-link' onClick={toggleMenu}>
           Contact
         </Link>

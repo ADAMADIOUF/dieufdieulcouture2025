@@ -301,6 +301,12 @@ p {
   align-items: center;
   justify-content: center;
 }
+.cart-icon{
+  color: var(--clr-black);
+}
+.cart-button a span{
+  color: var(--clr-primary-1);
+}
 /* Styles for the register-dropdown container */
 .register-dropdown {
   position: relative;
@@ -322,7 +328,7 @@ p {
 
 /* Styles for the Sign In button when user is not logged in */
 .nav-button {
-  background-color: #3498db;
+  background-color: var(--clr-primary-1);
   color: white;
   padding: 10px 15px;
   text-decoration: none;
@@ -334,7 +340,7 @@ p {
 }
 
 .nav-button:hover {
-  background-color: #2980b9;
+  background-color:var(--clr-primary-1-hover);
 }
 
 /* Dropdown container styles */
@@ -403,7 +409,7 @@ p {
   background-color: #f1f1f1;
 }
 
-/* CSS */
+/* HeroSlider */
 .hero-slider {
   position: relative;
   width: 100%;
@@ -505,6 +511,37 @@ p {
   }
 }
 /* TopCategories */
+.boutique-container {
+  text-align: center;
+  background-color: #f8f8f8;  /* Light background for the section */
+  padding: 30px 20px;
+  margin: 40px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.boutique-container h2 {
+  font-size: 36px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.boutique-container h3 {
+  font-size: 28px;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.boutique-container p {
+  font-size: 16px;
+  color: #777;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 .categories-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

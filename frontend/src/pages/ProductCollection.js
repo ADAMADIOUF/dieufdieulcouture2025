@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
 import Rating from '../components/Rating'
+import FormatCurrency from '../components/FormatCurrency'
 
 const ProductCollection = ({ keyword }) => {
   // Receive the keyword as a prop
@@ -33,7 +34,7 @@ const ProductCollection = ({ keyword }) => {
           Go Back
         </Link>
       )}
-      <h2>Products collection</h2>
+      <h2>Collection de Vêtements</h2>
       <div className='product-grid'>
         {productsData?.products?.map((product) => (
           <div key={product._id} className='product-card'>
@@ -59,10 +60,10 @@ const ProductCollection = ({ keyword }) => {
             </div>
             <div className='product-details'>
               <h3>{product.name}</h3>
-              {product.Oldprice && (
-                <p className='old-price'>${product.Oldprice}</p>
-              )}
-              <p className='new-price'>${product.price}</p>
+              <p className='old-price'>{
+    FormatCurrency(product.Oldprice)}</p>
+
+<p className='new-price'>{FormatCurrency(product.price)}</p>
               <Rating
                 value={product.rating}
                 text={`${product.numReviews} reviews`}

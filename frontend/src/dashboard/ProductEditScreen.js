@@ -14,6 +14,7 @@ const ProductEditScreen = () => {
   const { id: productId } = useParams()
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
+  const [Oldprice, setOldPrice] = useState(0)
   const [images, setImages] = useState([])
   const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
@@ -37,6 +38,7 @@ const ProductEditScreen = () => {
     if (product) {
       setName(product.name)
       setPrice(product.price)
+      setOldPrice(product.Oldprice)
       setImages(product.images)
       setBrand(product.brand)
       setCategory(product.category)
@@ -54,6 +56,7 @@ const ProductEditScreen = () => {
       productId,
       name,
       price,
+     Oldprice,
       images,
       brand,
       category,
@@ -126,6 +129,17 @@ const ProductEditScreen = () => {
                 placeholder='Enter price'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                required
+              />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='price'>Old Price</label>
+              <input
+                type='number'
+                id='price'
+                placeholder='Enter price'
+                value={Oldprice}
+                onChange={(e) => setOldPrice(e.target.value)}
                 required
               />
             </div>
