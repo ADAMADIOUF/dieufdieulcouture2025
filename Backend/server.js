@@ -5,7 +5,10 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import cookieParser from 'cookie-parser'
 import productRoute from './routes/productRoute.js'
 import userRoute from './routes/userRoute.js'
+import orderRoute from './routes/orderRoute.js'
+import contactRoute from './routes/contactRoute.js'
 import uploadRoute from './routes/uploadRoute.js'
+import wishlistRoute from './routes/wishlistRoute.js'
 import connectDB from './config/db.js'
 dotenv.config()
 connectDB()
@@ -16,6 +19,9 @@ app.use(cookieParser())
 const port = process.env.PORT || 5000
 app.use('/api/products', productRoute)
 app.use('/api/users', userRoute)
+app.use('/api/orders', orderRoute)
+app.use('/api/form/contact', contactRoute)
+app.use('/api/wishlist', wishlistRoute)
 app.use(`/api/upload`, uploadRoute)
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))

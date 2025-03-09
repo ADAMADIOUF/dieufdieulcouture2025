@@ -1,30 +1,49 @@
 import React, { useState } from 'react'
-import { useGetproductDetailQuery } from '../slices/productApiSlice'
-import { useNavigate, useParams } from 'react-router-dom'
+import {
+  useGetproductDetailQuery,
+  useCreateReviewMutation,
+  useDeleteReviewMutation,
+} from '../slices/productApiSlice'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
 import Rating from '../components/Rating'
 import TabSingleProduct from '../components/TabSingleProduct'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../slices/cartSlice'
-import { FaMinus, FaPlus } from 'react-icons/fa'
+import { FaHeart, FaMinus, FaPlus, FaTrash } from 'react-icons/fa'
 import FormatCurrency from '../components/FormatCurrency'
+import { toast } from 'react-toastify'
+import { useAddToWishlistMutation } from '../slices/wishApiSlice'
+import  Message  from '../components/Error'
 
 const SingleProduct = () => {
   const [qty, setQty] = useState(1)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
   const [mainImage, setMainImage] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [selectedSize, setSelectedSize] = useState('')
   const [activeTab, setActiveTab] = useState('description') // Active tab state
   const { id: productId } = useParams()
+  const { userInfo } = useSelector((state) => state.auth)
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
+  // Get product details from the API
   const {
     data: product,
+    refetch,
     isLoading: loading,
     error,
   } = useGetproductDetailQuery(productId)
+
+  const [createReview, { isLoading: loadingProductReview }] =
+    useCreateReviewMutation()
+  const [deleteReview, { isLoading: loadingDeletedReview }] =
+    useDeleteReviewMutation()
+  const [addToWishlist, { isLoading: loadingAddToWishlist }] =
+    useAddToWishlistMutation()
 
   const incrementQuantity = () => {
     if (qty < product.countInStock) {
@@ -49,6 +68,47 @@ const SingleProduct = () => {
     navigate('/cart')
   }
 
+  const addToWishlistHandler = async () => {
+    try {
+      await addToWishlist(productId).unwrap() // Call the mutation to add to wishlist
+      toast.success('Product added to wishlist!')
+    } catch (error) {
+      toast.error('Failed to add to wishlist. Please login.')
+    }
+  }
+
+  const handleColorSelect = (color) => setSelectedColor(color)
+  const handleSizeSelect = (size) => setSelectedSize(size)
+
+  const handleTabClick = (tab) => setActiveTab(tab) // Handle tab changes
+
+  const deleteReviewHandler = async (reviewId) => {
+    try {
+      await deleteReview({ productId, reviewId }).unwrap()
+      refetch()
+      toast.success('Review Deleted')
+    } catch (error) {
+      toast.error(error?.data?.message || error.error)
+    }
+  }
+const submitHandler = async (e) => {
+  e.preventDefault()
+  try {
+    await createReview({
+      productId,
+      rating,
+      comment,
+    }).unwrap()
+    refetch()
+    toast.success('Review Submited')
+    setRating(0)
+    setComment('')
+  } catch (error) {
+    toast.error(error?.data?.message || error.error)
+  }
+}
+
+
   if (loading) return <Loading />
   if (error) return <Error variant='danger'>{error}</Error>
 
@@ -63,12 +123,8 @@ const SingleProduct = () => {
     colors,
     sizes,
     countInStock,
+    reviews,
   } = product || {}
-
-  const handleColorSelect = (color) => setSelectedColor(color)
-  const handleSizeSelect = (size) => setSelectedSize(size)
-
-  const handleTabClick = (tab) => setActiveTab(tab) // Handle tab changes
 
   return (
     <>
@@ -98,11 +154,8 @@ const SingleProduct = () => {
           <p className='category'>{category}</p>
 
           <div className='price'>
-            <p className='old-price'>{
-    FormatCurrency(product.Oldprice)}</p>
-
-<p className='new-price'>{FormatCurrency(product.price)}</p>
-            
+            <p className='old-price'>{FormatCurrency(Oldprice)}</p>
+            <p className='new-price'>{FormatCurrency(price)}</p>
           </div>
           <Rating value={product.rating} text={`${product.numReviews} Avis`} />
           <p className='description'>
@@ -110,11 +163,11 @@ const SingleProduct = () => {
           </p>
 
           <div className='stock-info'>
-            <p>{countInStock > 0 ? 'In Stock' : 'Out of Stock'}</p>
+            <p>{countInStock > 0 ? 'En Stock' : 'Rupture de Stock'}</p>
           </div>
 
           <div className='sizes'>
-            <label>Sizes:</label>
+            <label>Tailles:</label>
             <ul>
               {sizes.map((size, index) => (
                 <li
@@ -129,7 +182,7 @@ const SingleProduct = () => {
           </div>
 
           <div className='colors'>
-            <label>Colors:</label>
+            <label>Couleurs:</label>
             <ul>
               {colors.map((color, index) => (
                 <li
@@ -149,9 +202,10 @@ const SingleProduct = () => {
               ))}
             </ul>
           </div>
-          {product.countInStock > 0 && (
+
+          {countInStock > 0 && (
             <div className='quantity-controls'>
-              <h3>Quantity</h3>
+              <h3>Quantité</h3>
               <button className='quantity-button' onClick={decrementQuantity}>
                 <FaMinus />
               </button>
@@ -160,14 +214,11 @@ const SingleProduct = () => {
                 value={qty}
                 onChange={(e) =>
                   setQty(
-                    Math.max(
-                      1,
-                      Math.min(product.countInStock, Number(e.target.value))
-                    )
+                    Math.max(1, Math.min(countInStock, Number(e.target.value)))
                   )
                 }
                 min='1'
-                max={product.countInStock}
+                max={countInStock}
                 className='quantity-input'
               />
               <button className='quantity-button' onClick={incrementQuantity}>
@@ -175,22 +226,100 @@ const SingleProduct = () => {
               </button>
             </div>
           )}
+
           <button
             type='button'
-            disabled={
-              product.countInStock === 0 || !selectedColor || !selectedSize
-            }
+            disabled={countInStock === 0 || !selectedColor || !selectedSize}
             onClick={addToCartHandler}
             className={`add-to-cart-btn ${
-              product.countInStock === 0 || !selectedColor || !selectedSize
+              countInStock === 0 || !selectedColor || !selectedSize
                 ? 'disabled'
                 : ''
             }`}
           >
-            Add to Cart
+            Ajouter au Panier
+          </button>
+
+          <button
+            className='btn btn-danger'
+            onClick={addToWishlistHandler}
+            disabled={loadingAddToWishlist}
+          >
+            <FaHeart /> Add to Wishlist
           </button>
         </div>
+
+        <div className='reviews-list'>
+                    {product.reviews.map((review) => (
+                      <div key={review._id} className='review-item'>
+                        <strong>{review.name}</strong>
+                        <Rating value={review.rating} />
+                        <p>{review.createdAt.substring(0, 10)}</p>
+                        <p>{review.comment}</p>
+                        {userInfo && review.user === userInfo._id && (
+                          <button
+                            className='btn-delete'
+                            onClick={() => deleteReviewHandler(review._id)}
+                          >
+                            <FaTrash />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className='review-form'>
+                    <h2>Write a Customer Review</h2>
+                    {loadingProductReview && <Loading />}
+                    {userInfo ? (
+                      <form onSubmit={submitHandler}>
+                        <div className='form-group'>
+                          <label htmlFor='rating'>Rating</label>
+                          <select
+                            id='rating'
+                            value={rating}
+                            onChange={(e) => setRating(Number(e.target.value))}
+                          >
+                            <option value=''>Select...</option>
+                            <option value='1'>1 - Poor</option>
+                            <option value='2'>2 - Fair</option>
+                            <option value='3'>3 - Good</option>
+                            <option value='4'>4 - Very Good</option>
+                            <option value='5'>5 - Excellent</option>
+                          </select>
+                        </div>
+
+                        <div className='form-group'>
+                          <label htmlFor='comment'>Comment</label>
+                          <textarea
+                            id='comment'
+                            rows='3'
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                          />
+                        </div>
+
+                        <button
+                          className='btn-submit'
+                          disabled={loadingProductReview}
+                          type='submit'
+                        >
+                          Submit
+                        </button>
+                      </form>
+                    ) : (
+                      <Message>
+                        Please <Link to={`/login`}>Sign In</Link> to write a
+                        review
+                      </Message>
+                    )}
+                  </div>
+               
+              
+          
+       
       </div>
+
       <div className='tabs'>
         <button
           onClick={() => handleTabClick('description')}
@@ -202,13 +331,13 @@ const SingleProduct = () => {
           onClick={() => handleTabClick('info')}
           className={activeTab === 'info' ? 'active' : ''}
         >
-          Product Info
+          Informations sur le produit
         </button>
         <button
           onClick={() => handleTabClick('reviews')}
           className={activeTab === 'reviews' ? 'active' : ''}
         >
-          Reviews
+          Avis
         </button>
       </div>
 
@@ -217,7 +346,7 @@ const SingleProduct = () => {
         price={price}
         description={description}
         activeTab={activeTab}
-        reviews={product.reviews}
+        reviews={reviews}
       />
     </>
   )

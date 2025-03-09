@@ -22,7 +22,11 @@ import AdminRoute from './components/AdminRoute'
 import ProductListScreen from './dashboard/ProductListScreen'
 import ProductEditScreen from './dashboard/ProductEditScreen'
 import WomenClothing from './clothings/WomenClothing'
-
+import Shipping from './pages/Shipping'
+import PlaceOrder from './pages/PlaceOrder'
+import Order from './pages/Order'
+import WishList from "./pages/WishList"
+import PrivateRoute from './components/PrivateRoute'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -34,6 +38,12 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartPage />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+      <Route path='' element={<PrivateRoute />}>
+        <Route path='/shipping' element={<Shipping />} />
+        <Route path='/placeorder' element={<PlaceOrder />} />
+        <Route path='/order/:id' element={<Order />} />
+        <Route path='/wishlist' element={<WishList />} />
+      </Route>
       <Route path='' element={<AdminRoute />}>
         <Route path='/admin/productlist' element={<ProductListScreen />} />
         <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />

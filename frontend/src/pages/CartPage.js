@@ -4,15 +4,12 @@ import { FaTrash, FaMinus, FaPlus } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Error'
 import { addToCart, removeFromCart, clearCartItems } from '../slices/cartSlice' // Added clearCart action
+import FormatCurrency from '../components/FormatCurrency'
 
 const CartPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { cartItems, error } = useSelector((state) => state.cart) // Get error from redux store
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
+  const { cartItems, error } = useSelector((state) => state.cart)
 
   const checkoutHandler = () => {
     navigate('/login?redirect=/shipping')
@@ -23,15 +20,16 @@ const CartPage = () => {
   }
 
   const clearCartHandler = () => {
-    dispatch(clearCartItems()) // Clear the cart completely
+    dispatch(clearCartItems())
   }
 
   return (
     <div className='shopping-cart'>
+      
       {error && <Message>{error}</Message>} {/* Show error message */}
       {cartItems.length === 0 ? (
         <Message>
-          Your cart is empty. <Link to={`/shop`}>Go Back</Link>
+          Votre panier est vide. <Link to={`/shop`}>Retourner au magasin</Link>
         </Message>
       ) : (
         <div className='shopping-cart-items'>
@@ -47,9 +45,9 @@ const CartPage = () => {
       {cartItems.length > 0 && (
         <button
           className='clear-cart-button'
-          onClick={clearCartHandler} // Button to clear the cart
+          onClick={clearCartHandler}
         >
-          Clear Cart
+          Vider le panier
         </button>
       )}
       <CartSummary cartItems={cartItems} checkoutHandler={checkoutHandler} />
@@ -77,12 +75,7 @@ const CartItem = ({ item, removeFromCartHandler }) => {
 
   return (
     <>
-      <div className='product-screen-bg'>
-        <span>
-          <Link to={`/shop`}>All</Link>
-        </span>
-        <span>{item.name.substring(0, 20)}</span>
-      </div>
+      
       <div className='shopping-cart-item section-center'>
         <article>
           <img
@@ -95,9 +88,11 @@ const CartItem = ({ item, removeFromCartHandler }) => {
           <Link className='shopping-cart-item-name' to={`/product/${item._id}`}>
             {item.name.substring(0, 50)}
           </Link>
-          <div className='shopping-cart-item-price'>${item.price}</div>
+          <div className='shopping-cart-item-price'>
+            {FormatCurrency(item.price)}
+          </div>
           <div className='shopping-cart-item-color'>
-            <strong>Color:</strong>
+            <strong>Couleur:</strong>
             <span
               style={{
                 backgroundColor: item.color, // Use the color directly from the item
@@ -110,10 +105,10 @@ const CartItem = ({ item, removeFromCartHandler }) => {
             {item.color}
           </div>
           <div className='shopping-cart-item-size'>
-            <strong>Size:</strong> {item.size}
+            <strong>Taille:</strong> {item.size}
           </div>
           <div className='quantity-controls'>
-            <h3>Quantity</h3>
+            <h3>Quantité</h3>
             <button className='quantity-button' onClick={decrementQuantity}>
               <FaMinus />
             </button>
@@ -152,20 +147,20 @@ const CartSummary = ({ cartItems, checkoutHandler }) => {
   return cartItems.length > 0 ? (
     <div className='shopping-cart-summary'>
       <h2>
-        Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+        Sous-total ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+        articles
       </h2>
       <div className='shopping-cart-total'>
-        $
-        {cartItems
-          .reduce((acc, item) => acc + item.qty * item.price, 0)
-          .toFixed(2)}
+        {FormatCurrency(
+          cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)
+        )}
       </div>
       <button
         className='checkout-button'
         disabled={cartItems.length === 0}
         onClick={checkoutHandler}
       >
-        Proceed To Checkout
+        Procéder au paiement
       </button>
     </div>
   ) : null

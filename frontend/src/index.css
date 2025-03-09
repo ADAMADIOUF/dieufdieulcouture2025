@@ -719,9 +719,24 @@ p {
 
 .banner-container {
   width: 100%;
-  height: 400px;
+  height: 500px;
   background-color:var(--clr-primary-2);
   background-image: url('./assets/firstbanner.png');
+  background-position: center; 
+  background-size:fill; 
+  background-repeat: no-repeat; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  
+}
+
+.second-banner-container {
+  width: 100%;
+  height: 500px;
+  background-color:var(--clr-primary-1);
+  background-image: url('./assets/secondbanner.png');
   background-position: center; 
   background-size:fill; 
   background-repeat: no-repeat; 
@@ -1767,6 +1782,33 @@ font-size: 1.5rem;
   display: block;
 }
 /* CartPage Styles */
+.product-screen-bg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-screen-bg span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.product-screen-bg a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+}
+
+.product-screen-bg a:hover {
+  text-decoration: underline;
+}
+
 .shopping-cart {
   padding: 20px;
 }
@@ -2384,4 +2426,362 @@ form {
 
 .search-button:active {
   background-color: var(--clr-primary-1-hover);
+}
+/* Shipping */
+/* Style for the shipping form container */
+.shipping-container {
+  max-width: 32rem; /* Equivalent to max-w-lg */
+  margin: 2.5rem auto; /* Equivalent to mx-auto mt-10 */
+  padding: 1.5rem; /* Equivalent to p-6 */
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+}
+
+/* Style for the title */
+.shipping-container h2 {
+  font-size: 1.5rem; /* Equivalent to text-2xl */
+  font-weight: 600; /* Equivalent to font-semibold */
+  margin-bottom: 1rem; /* Equivalent to mb-4 */
+  text-align: center; /* Equivalent to text-center */
+}
+
+/* Style for the form inputs */
+.shipping-container .form-input {
+  width: 100%;
+  padding: 0.5rem; /* Equivalent to p-2 */
+  border: 1px solid #ddd; /* Equivalent to border */
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  margin-bottom: 1rem; /* Spacing between fields */
+}
+
+/* Style for the select input */
+.shipping-container select {
+  width: 100%;
+  padding: 0.5rem; /* Equivalent to p-2 */
+  border: 1px solid #ddd; /* Equivalent to border */
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  margin-bottom: 1rem; /* Spacing between fields */
+}
+
+/* Style for the submit button */
+.shipping-container .submit-button {
+  width: 100%;
+  background-color: #3b82f6; /* Equivalent to bg-blue-500 */
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.shipping-container .submit-button:hover {
+  background-color: #2563eb; /* Equivalent to hover:bg-blue-600 */
+}
+
+/* Style for the label text */
+.shipping-container label {
+  display: block;
+  font-weight: 500; /* Equivalent to font-medium */
+  margin-bottom: 0.5rem;
+}
+/* PlaceOrder */
+/* Container for the main content */
+.place-order-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Flexbox layout for placing order */
+.place-order {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.place-order-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .place-order-content {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Place order section styling */
+.placeorder-details,
+.placeorder-payment {
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.placeorder-title,
+.placeorder-payment-text,
+.placeorder-commad {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.placeorder-details p,
+.placeorder-payment p {
+  margin-top: 8px;
+}
+
+/* Product list and order item styles */
+.border {
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-cart-item-color span {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.shopping-cart-item-size {
+  margin-top: 8px;
+}
+
+.shopping-cart-item img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.shopping-cart-item a {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.shopping-cart-item p {
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+/* Order summary styles */
+.border p {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+
+
+/* Button for Stripe payment */
+.btn-placeorder {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 16px;
+  background-color: #3182ce; /* Blue background */
+  color: white; /* White text */
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the button */
+.btn-placeorder:hover {
+  background-color: #2b6cb0; /* Darker blue on hover */
+}
+
+
+
+/* Order Screen */
+.order-screen {
+  padding: 2rem;
+}
+
+.order-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* Order Details */
+.order-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Shipping Information */
+.shipping-info, .payment-info, .order-items {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Order Items */
+.order-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.item-image img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-link {
+  font-weight: bold;
+  color: #3182ce;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.item-link:hover {
+  text-decoration: underline;
+}
+
+.shopping-cart-item-color span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* Order Summary */
+.order-summary {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* Button for Deliver */
+.btn-deliver {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.btn-deliver:hover {
+  background-color: #45a049;
+}
+
+/* Loader */
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+/* ContactForm */
+.contact-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-submit:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: center;
 }

@@ -255,8 +255,13 @@ const Shop = () => {
                 <p className='old-price'>{FormatCurrency(product.Oldprice)}</p>
 
                 <p className='new-price'>{FormatCurrency(product.price)}</p>
-                <Rating value={product.rating} text={`${product.numReviews} Avis`} />
-                <p>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</p>
+                <Rating
+                  value={product.rating}
+                  text={`${product.numReviews} Avis`}
+                />
+                <p>
+                  {product.countInStock > 0 ? 'En Stock' : 'Rupture de Stock'}
+                </p>
               </div>
             ))}
           </div>
