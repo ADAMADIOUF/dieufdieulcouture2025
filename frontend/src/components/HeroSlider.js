@@ -4,7 +4,7 @@ const slides = [
   {
     id: 1,
     image:
-      'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2xvdGhpbmd8ZW58MHx8MHx8fDA%3D',
+      'https://i.pinimg.com/474x/50/51/5f/50515f530daa7bb3d87ab5952088022e.jpg',
     title: 'Bienvenue chez Dieuf Dieul Couture',
     description:
       'Découvrez nos créations uniques avec une touche de tradition et de modernité.',
@@ -14,7 +14,7 @@ const slides = [
   {
     id: 2,
     image:
-      'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhpbmd8ZW58MHx8MHx8fDA%3D',
+      'https://i.pinimg.com/474x/3f/1f/d3/3f1fd347dad5ed16e4d507d369874a51.jpg',
     title: 'Style et Élégance',
     description: 'Des vêtements conçus pour chaque occasion spéciale.',
     button: 'Nous Contacter',
@@ -23,7 +23,7 @@ const slides = [
   {
     id: 3,
     image:
-      'https://images.unsplash.com/photo-1470309864661-68328b2cd0a5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoaW5nfGVufDB8fDB8fHww',
+      'https://i.pinimg.com/474x/93/e4/f2/93e4f260d05ef918f30316c33a02ef7e.jpg',
     title: 'Qualité Artisanale',
     description: 'Chaque pièce est fabriquée avec soin et expertise.',
     button: 'Prendre Rendez-vous',

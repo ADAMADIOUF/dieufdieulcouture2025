@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import sendEmail from '../utils/sendEmail.js' 
+import sendEmail from '../utils/sendEmail.js'
 
 const contactSchema = new mongoose.Schema(
   {
@@ -35,10 +35,9 @@ const contactSchema = new mongoose.Schema(
   }
 )
 
-
 contactSchema.post('save', async function (doc) {
   const emailOptions = {
-    to: 'adamadiouf2017@gmail.com', // Replace with recipient's email address
+    to: 'pacowefor@gmail.com', // Remplacé par le bon email
     subject: 'New Contact Form Submission',
     message: `
       First Name: ${doc.firstName}
@@ -47,12 +46,11 @@ contactSchema.post('save', async function (doc) {
       Description: ${doc.description}
       Address: ${doc.address}
       Total Price: ${doc.totalPrice}
-       Product name: ${doc.productName}
+      Product Name: ${doc.productName}
     `,
   }
 
   try {
-    // Call the sendEmail function with emailOptions
     await sendEmail(emailOptions)
     console.log('Notification email sent successfully.')
   } catch (error) {

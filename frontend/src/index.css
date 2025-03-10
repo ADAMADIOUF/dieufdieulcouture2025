@@ -413,14 +413,14 @@ p {
 .hero-slider {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full height */
+  height: 100vh; 
   overflow: hidden;
 }
 
 .slide {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 950px;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
