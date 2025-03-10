@@ -23,6 +23,7 @@ app.use('/api/orders', orderRoute)
 app.use('/api/form/contact', contactRoute)
 app.use('/api/wishlist', wishlistRoute)
 app.use(`/api/upload`, uploadRoute)
+
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
