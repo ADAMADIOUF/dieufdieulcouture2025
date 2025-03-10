@@ -241,7 +241,7 @@ const submitHandler = async (e) => {
           </button>
 
           <button
-            className='btn btn-danger'
+            className='btn-wishlist'
             onClick={addToWishlistHandler}
             disabled={loadingAddToWishlist}
           >
@@ -249,76 +249,7 @@ const submitHandler = async (e) => {
           </button>
         </div>
 
-        <div className='reviews-list'>
-                    {product.reviews.map((review) => (
-                      <div key={review._id} className='review-item'>
-                        <strong>{review.name}</strong>
-                        <Rating value={review.rating} />
-                        <p>{review.createdAt.substring(0, 10)}</p>
-                        <p>{review.comment}</p>
-                        {userInfo && review.user === userInfo._id && (
-                          <button
-                            className='btn-delete'
-                            onClick={() => deleteReviewHandler(review._id)}
-                          >
-                            <FaTrash />
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className='review-form'>
-                    <h2>Write a Customer Review</h2>
-                    {loadingProductReview && <Loading />}
-                    {userInfo ? (
-                      <form onSubmit={submitHandler}>
-                        <div className='form-group'>
-                          <label htmlFor='rating'>Rating</label>
-                          <select
-                            id='rating'
-                            value={rating}
-                            onChange={(e) => setRating(Number(e.target.value))}
-                          >
-                            <option value=''>Select...</option>
-                            <option value='1'>1 - Poor</option>
-                            <option value='2'>2 - Fair</option>
-                            <option value='3'>3 - Good</option>
-                            <option value='4'>4 - Very Good</option>
-                            <option value='5'>5 - Excellent</option>
-                          </select>
-                        </div>
-
-                        <div className='form-group'>
-                          <label htmlFor='comment'>Comment</label>
-                          <textarea
-                            id='comment'
-                            rows='3'
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                          />
-                        </div>
-
-                        <button
-                          className='btn-submit'
-                          disabled={loadingProductReview}
-                          type='submit'
-                        >
-                          Submit
-                        </button>
-                      </form>
-                    ) : (
-                      <Message>
-                        Please <Link to={`/login`}>Sign In</Link> to write a
-                        review
-                      </Message>
-                    )}
-                  </div>
-               
-              
-          
-       
-      </div>
+       </div>
 
       <div className='tabs'>
         <button

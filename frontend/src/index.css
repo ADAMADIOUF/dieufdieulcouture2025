@@ -672,6 +672,23 @@ p {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+.btn-wishlist {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #ff4d4d; /* Couleur rouge pour l'icône du cœur */
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn-wishlist:hover {
+  color: #d63031; /* Rouge plus foncé au survol */
+  transform: scale(1.2); /* Effet de zoom au survol */
+}
+
+.btn-wishlist:active {
+  transform: scale(1); /* Réduit légèrement lorsqu'on clique */
+}
 
 .wishlist-icon, .quick-view-icon {
   background: #F54085;
@@ -2784,4 +2801,29 @@ form {
   font-size: 16px;
   margin-top: 20px;
   text-align: center;
+}
+/* AboutUs */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #f5f5f5;
+}
+
+.about-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.about-content h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  color: #555;
+  font-size: 18px;
+  line-height: 1.6;
 }

@@ -27,13 +27,17 @@ import PlaceOrder from './pages/PlaceOrder'
 import Order from './pages/Order'
 import WishList from "./pages/WishList"
 import PrivateRoute from './components/PrivateRoute'
+import About from './components/About'
+import MenClothing from './clothings/MenClothing'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomePage />} />
       <Route path='/search/:keyword' element={<HomePage />} />
+      <Route path='/about' element={<About />} />
       <Route path='/shop' element={<Shop />} />
       <Route path='/femmes' element={<WomenClothing />} />
+      <Route path='/hommes' element={<MenClothing />} />
       <Route path='/product/:id' element={<SingleProduct />} />
       <Route path='/cart' element={<CartPage />} />
       <Route path='/login' element={<Login />} />

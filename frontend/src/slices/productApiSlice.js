@@ -34,13 +34,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ['Product'],
     }),
-    getProductsShoes: builder.query({
-      query: () => ({
-        url: `${PRODUCTS_URL}/shoes`,
-      }),
-      providesTags: ['Product'],
-      keepUnusedDataFor: 5,
-    }),
+    
     getProductsClothing: builder.query({
       query: () => ({
         url: `${PRODUCTS_URL}/clothing`,
@@ -48,20 +42,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
       providesTags: ['Product'],
       keepUnusedDataFor: 5,
     }),
-    getProductsAccesory: builder.query({
-      query: () => ({
-        url: `${PRODUCTS_URL}/accesory`,
-      }),
-      providesTags: ['Product'],
-      keepUnusedDataFor: 5,
-    }),
-    getProductsAfrican: builder.query({
-      query: () => ({
-        url: `${PRODUCTS_URL}/african`,
-      }),
-      providesTags: ['Product'],
-      keepUnusedDataFor: 5,
-    }),
+    
     getproductDetail: builder.query({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
@@ -113,21 +94,12 @@ export const productApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Product'],
     }),
-    getTopProducts: builder.query({
-      query: () => ({
-        url: `${PRODUCTS_URL}/top`,
-      }),
-      keepUnusedDataFor: 5,
-    }),
+    
   }),
 })
 export const {
   useGetAllproductsQuery,
-  useGetProductsQuery,
-  useGetProductsShoesQuery,
   useGetProductsClothingQuery,
-  useGetProductsAccesoryQuery,
-  useGetProductsAfricanQuery,
   useGetproductDetailQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
@@ -135,5 +107,5 @@ export const {
   useDeleteProductMutation,
   useCreateReviewMutation,
   useDeleteReviewMutation,
-  useGetTopProductsQuery,
+ 
 } = productApiSlice
