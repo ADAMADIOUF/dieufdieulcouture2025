@@ -70,16 +70,16 @@ const PlaceOrderScreen = () => {
                 {cart.cartItems.map((item, index) => (
                   <li
                     key={index}
-                    className='flex items-center gap-4 p-2 border-b'
+                    className='place-order-item'
                   >
                     <img
                       src={item.images[0]}
                       alt={item.name}
-                      className='w-16 h-16 object-cover rounded'
+                      className='place-order-img'
                     />
                     <Link
                       to={`/product/${item._id}`}
-                      className='flex-1 text-blue-600'
+                      className='place-order-name'
                     >
                       {item.name.substring(0, 45)}
                     </Link>
@@ -109,7 +109,7 @@ const PlaceOrderScreen = () => {
         </div>
 
         <div className='border p-4 rounded shadow h-max'>
-          <h2 className='text-xl font-bold mb-2'>Résumé de la Commande</h2>
+          <h2 className='place-order-summary-order'>Résumé de la Commande</h2>
           <p>
             <strong>Total:</strong> ${cart.totalPrice}
           </p>

@@ -15,6 +15,7 @@ const HomePage = () => {
   const { keyword } = useParams() // Get the keyword from the URL params
   return (
     <div>
+      
       {!keyword && <HeroSlider />}
       {!keyword && <TopCategories />}
       {!keyword && <RecentProducts />}
@@ -26,6 +27,7 @@ const HomePage = () => {
      
       {!keyword && <Partener />}
       {!keyword && <FollowInstagram />}
+      
     </div>
   )
 }

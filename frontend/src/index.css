@@ -149,6 +149,33 @@ p {
   100% { transform: rotate(360deg); }
 }
 /* NavbarSection */
+.topbar-container {
+  background-color: #222;
+  color: white;
+  padding: 10px 8px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: moveText 10s linear infinite alternate;
+}
+
+@keyframes moveText {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 .no-wrap {
   white-space: nowrap;
 }
@@ -413,16 +440,19 @@ p {
 .hero-slider {
   position: relative;
   width: 100%;
-  height: 100vh; 
+  height: 100vh;
   overflow: hidden;
 }
 
 .slide {
   position: absolute;
   width: 100%;
-  height: 950px;
+  height: 100vh;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .slide.active {
@@ -437,6 +467,7 @@ p {
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Dark overlay */
   z-index: 1;
+
 }
 
 .slide-content {
@@ -847,7 +878,7 @@ p {
 
 .partner-section {
   padding: 50px 20px;
-  background-color: #f7f7f7; /* Light background color */
+  background-color: #f7f7f7;
   text-align: center;
 }
 
@@ -864,30 +895,71 @@ p {
 }
 
 .partner-slider .slick-slide {
-  transition: transform 0.3s ease-in-out; /* Animation on hover */
+  transition: transform 0.3s ease-in-out;
 }
 
 .partner-item {
   background-color: #fff;
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 120px; /* Ensure uniform height */
+  max-width: 200px; /* Ensure width doesn't expand too much */
+  margin: auto;
 }
 
 .partner-logo {
   max-width: 100%;
-  height: 100px; /* Set the same height for all logos */
-  object-fit: contain; /* Ensures aspect ratio is maintained */
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
   display: block;
 }
 
 .partner-item:hover {
-  transform: translateY(-10px); /* Hover effect: raise the card */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .partner-title h2 {
+    font-size: 1.8rem;
+  }
+  .partner-title p {
+    font-size: 0.9rem;
+  }
+  .partner-item {
+    height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .partner-title h2 {
+    font-size: 1.6rem;
+  }
+  .partner-title p {
+    font-size: 0.85rem;
+  }
+  .partner-item {
+    height: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-title h2 {
+    font-size: 1.4rem;
+  }
+  .partner-title p {
+    font-size: 0.8rem;
+  }
+  .partner-item {
+    height: 80px;
+    padding: 10px;
+  }
 }
 
 /* FolloInsta */
@@ -1613,6 +1685,34 @@ font-size: 1.5rem;
   background-color: #ccc;
   cursor: not-allowed;
 }
+.whatsapp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.whatsapp-btn {
+  background-color: #25d366; /* WhatsApp Green */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  transition: background 0.3s ease-in-out;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe5d;
+}
+
+.whatsapp-widget {
+  margin-top: 15px;
+}
 
 @media (max-width: 768px) {
   .single-product-container {
@@ -1808,6 +1908,7 @@ font-size: 1.5rem;
   background-color: #f4f4f4;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
 }
 
 .product-screen-bg span {
@@ -1830,6 +1931,7 @@ font-size: 1.5rem;
   padding: 20px;
 }
 
+/* Shopping Cart Items */
 .shopping-cart-items {
   display: flex;
   flex-direction: column;
@@ -1844,6 +1946,7 @@ font-size: 1.5rem;
   padding: 10px;
   border-radius: 5px;
   background-color: #f9f9f9;
+  flex-wrap: wrap;
 }
 
 .shopping-cart-item-image {
@@ -1876,6 +1979,11 @@ font-size: 1.5rem;
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.quantity-button:hover {
+  background-color: #0056b3;
 }
 
 .quantity-input {
@@ -1894,8 +2002,14 @@ font-size: 1.5rem;
   border-radius: 50%;
   cursor: pointer;
   color: white;
+  transition: background 0.3s ease-in-out;
 }
 
+.shopping-cart-item-remove:hover {
+  background-color: #d32f2f;
+}
+
+/* Color Indicator */
 .shopping-cart-item-color {
   display: flex;
   align-items: center;
@@ -1931,6 +2045,7 @@ font-size: 1.5rem;
   margin: 10px 0;
 }
 
+/* Buttons */
 .checkout-button {
   background-color: #28a745;
   color: white;
@@ -1939,6 +2054,11 @@ font-size: 1.5rem;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.checkout-button:hover {
+  background-color: #218838;
 }
 
 .clear-cart-button {
@@ -1949,13 +2069,25 @@ font-size: 1.5rem;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.clear-cart-button:hover {
+  background-color: #c82333;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .product-screen-bg {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
   .shopping-cart-item {
     flex-direction: column;
     align-items: flex-start;
+    padding: 15px;
   }
 
   .shopping-cart-item-image {
@@ -1964,10 +2096,13 @@ font-size: 1.5rem;
 
   .quantity-controls {
     margin-top: 10px;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .quantity-button {
     padding: 5px 8px;
+    font-size: 14px;
   }
 
   .shopping-cart-item-name {
@@ -1976,6 +2111,7 @@ font-size: 1.5rem;
 
   .shopping-cart-summary {
     margin-top: 10px;
+    padding: 15px;
   }
 
   .shopping-cart-total {
@@ -2017,9 +2153,10 @@ font-size: 1.5rem;
   }
 }
 
+
 /* Login container styling */
 .login-screen {
-  background-color: white;
+  background-color:var(--clr-white);
   padding: 30px 40px;
   border-radius: 8px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
@@ -2063,13 +2200,13 @@ form {
 }
 
 .form-group input:focus {
-  border-color: #3498db;
+  border-color:var(--clr-primary-1);
   outline: none;
 }
 
 .submit-button {
   padding: 12px;
-  background-color: #3498db;
+  background-color:var(--clr-primary-1);
   color: white;
   border: none;
   border-radius: 5px;
@@ -2080,7 +2217,7 @@ form {
 }
 
 .submit-button:hover {
-  background-color: #2980b9;
+  background-color:var(--clr-primary-1-hover);
 }
 
 .submit-button:disabled {
@@ -2092,7 +2229,7 @@ form {
 .loader {
   margin-top: 10px;
   font-size: 16px;
-  color: #3498db;
+  color:var(--clr-primary-1);
 }
 
 /* Links container */
@@ -2101,7 +2238,7 @@ form {
 }
 
 .links a {
-  color: #3498db;
+  color:var(--clr-primary-1);
   text-decoration: none;
   font-size: 14px;
 }
@@ -2118,7 +2255,7 @@ form {
 }
 
 .register-link a {
-  color: #3498db;
+  color:var(--clr-primary-1);
 }
 
 .register-link a:hover {
@@ -2131,7 +2268,7 @@ form {
 }
 
 .return-to-store a {
-  color: #3498db;
+  color:var(--clr-primary-1);
   text-decoration: none;
 }
 
@@ -2139,25 +2276,7 @@ form {
   text-decoration: underline;
 }
 
-/* Google login button */
-.google-login {
-  margin-top: 15px;
-  padding: 12px;
-  background-color: #db4437;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s;
-}
 
-.google-login:hover {
-  background-color: #c1351d;
-}
-
-/* Media query for mobile responsiveness */
 @media (max-width: 480px) {
   .login-screen {
     padding: 20px 30px;
@@ -2445,9 +2564,9 @@ form {
   background-color: var(--clr-primary-1-hover);
 }
 /* Shipping */
-/* Style for the shipping form container */
+
 .shipping-container {
-  max-width: 32rem; /* Equivalent to max-w-lg */
+  max-width: 32rem; 
   margin: 2.5rem auto; /* Equivalent to mx-auto mt-10 */
   padding: 1.5rem; /* Equivalent to p-6 */
   background-color: white;
@@ -2484,7 +2603,7 @@ form {
 /* Style for the submit button */
 .shipping-container .submit-button {
   width: 100%;
-  background-color: #3b82f6; /* Equivalent to bg-blue-500 */
+  background-color:var(--clr-primary-1); /* Equivalent to bg-blue-500 */
   color: white;
   padding: 0.5rem;
   border-radius: 0.375rem; /* Equivalent to rounded-md */
@@ -2492,7 +2611,7 @@ form {
 }
 
 .shipping-container .submit-button:hover {
-  background-color: #2563eb; /* Equivalent to hover:bg-blue-600 */
+  background-color:var(--clr-primary-1-hover); /* Equivalent to hover:bg-blue-600 */
 }
 
 /* Style for the label text */
@@ -2502,72 +2621,78 @@ form {
   margin-bottom: 0.5rem;
 }
 /* PlaceOrder */
-/* Container for the main content */
+
+/* General container */
 .place-order-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
 }
 
-/* Flexbox layout for placing order */
+/* Flexbox layout */
 .place-order {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
+/* Place order content grid */
 .place-order-content {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
 }
 
+/* Media query for tablets and larger screens (768px and above) */
 @media (min-width: 768px) {
   .place-order-content {
     grid-template-columns: 2fr 1fr;
   }
 }
 
-/* Place order section styling */
+/* Styling for the order details and payment sections */
 .placeorder-details,
 .placeorder-payment {
   padding: 16px;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
+/* Section titles */
 .placeorder-title,
 .placeorder-payment-text,
 .placeorder-commad {
   font-size: 1.25rem;
   font-weight: 700;
 }
-
-.placeorder-details p,
-.placeorder-payment p {
-  margin-top: 8px;
+.place-order-img{
+  width: 100%;
 }
-
-/* Product list and order item styles */
+/* Styling for the product list and order item */
 .border {
   border: 1px solid #e2e8f0;
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
-.shopping-cart-item-color span {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: inline-block;
+/* Shopping cart item layout */
+.shopping-cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.shopping-cart-item-size {
-  margin-top: 8px;
+.shopping-cart-item:last-child {
+  border-bottom: none;
 }
 
+/* Image in shopping cart item */
 .shopping-cart-item img {
   width: 64px;
   height: 64px;
@@ -2575,16 +2700,105 @@ form {
   border-radius: 8px;
 }
 
+/* Product name link */
 .shopping-cart-item a {
   color: #3182ce;
   text-decoration: none;
   font-weight: 600;
+  flex: 1;
+  max-width: calc(100% - 80px);
 }
 
-.shopping-cart-item p {
-  font-size: 1rem;
-  margin-top: 8px;
+/* Color selection for items */
+.shopping-cart-item-color span {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
 }
+
+/* Size section */
+.shopping-cart-item-size {
+  font-size: 0.875rem;
+}
+
+/* Place order buttons */
+.btn-placeorder {
+  display: block;
+  width: 100%;
+  background-color: #3182ce;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-placeorder:hover {
+  background-color: #2563eb;
+}
+
+/* Order summary title */
+.place-order-summary-order {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Small screens (mobile-first) */
+@media (max-width: 767px) {
+  /* Adjust place order content for single column on mobile */
+  .place-order-content {
+    grid-template-columns: 1fr;
+  }
+
+  /* Shopping cart item layout adjustment for smaller screens */
+  .shopping-cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shopping-cart-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Buttons adjusted for smaller screens */
+  .btn-placeorder {
+    font-size: 1.1rem;
+    padding: 10px;
+  }
+
+  /* Margin adjustments */
+  .placeorder-details,
+  .placeorder-payment {
+    margin-bottom: 16px;
+  }
+}
+
+/* Larger screen adjustments (laptops/desktops) */
+@media (min-width: 1024px) {
+  .place-order-container {
+    max-width: 1100px;
+  }
+
+  .placeorder-details,
+  .placeorder-payment {
+    padding: 24px;
+  }
+
+  .place-order-summary-order {
+    font-size: 1.75rem;
+  }
+
+  .btn-placeorder {
+    font-size: 1.2rem;
+  }
+}
+
 
 /* Order summary styles */
 .border p {
@@ -2627,7 +2841,7 @@ form {
 }
 
 .order-title {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 2rem;
 }

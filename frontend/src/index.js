@@ -29,6 +29,8 @@ import WishList from "./pages/WishList"
 import PrivateRoute from './components/PrivateRoute'
 import About from './components/About'
 import MenClothing from './clothings/MenClothing'
+import ForgetPassword from './pages/ForgetPassword'
+import ResetPassword from './pages/ResetPassword'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -42,6 +44,8 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartPage />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/forgot-password' element={<ForgetPassword />} />
+      <Route path='/reset-password/:token' element={<ResetPassword />} />
       <Route path='' element={<PrivateRoute />}>
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/placeorder' element={<PlaceOrder />} />

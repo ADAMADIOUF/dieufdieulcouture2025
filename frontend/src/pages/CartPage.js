@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaTrash, FaMinus, FaPlus } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Error'
+import Error from '../components/Error'
 import { addToCart, removeFromCart, clearCartItems } from '../slices/cartSlice' // Added clearCart action
 import FormatCurrency from '../components/FormatCurrency'
 
@@ -26,11 +26,11 @@ const CartPage = () => {
   return (
     <div className='shopping-cart'>
       
-      {error && <Message>{error}</Message>} {/* Show error message */}
+      {error && <Error>{error}</Error>} {/* Show error message */}
       {cartItems.length === 0 ? (
-        <Message>
+        <Error>
           Votre panier est vide. <Link to={`/shop`}>Retourner au magasin</Link>
-        </Message>
+        </Error>
       ) : (
         <div className='shopping-cart-items'>
           {cartItems.map((item) => (
@@ -95,7 +95,7 @@ const CartItem = ({ item, removeFromCartHandler }) => {
             <strong>Couleur:</strong>
             <span
               style={{
-                backgroundColor: item.color, // Use the color directly from the item
+                backgroundColor: item.color, 
                 cursor: 'pointer',
                 padding: '10px',
                 margin: '5px',

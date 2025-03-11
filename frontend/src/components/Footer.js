@@ -6,11 +6,13 @@ const Footer = () => {
     <footer className='footer-container'>
       <div className='footer-about'>
         <h3>À propos du magasin</h3>
-        <p>Un des plus populaires sur le web pour faire des achats.</p>
+        <p>
+          Dieuf Dieul Couture, un atelier de couture à Cité Safco Tivaouane
+          Peul.
+        </p>
         <address>
-          <p>Wonder Street, USA, New York</p>
-          <p>+01 321 654 214</p>
-          <p>hello@xton.com</p>
+          <p>Cité Safco, Tivaouane Peul, Sénégal</p>
+          <p>+221 77 925 85 08</p>
         </address>
 
         <div className='social-links'>
@@ -53,40 +55,35 @@ const Footer = () => {
         <h4>Liens rapides</h4>
         <ul>
           <li>
-            <a href='/about-us'>À propos de nous</a>
+            <a href='/about'>À propos de nous</a>
           </li>
           <li>
-            <a href='/shop-now'>Achetez maintenant!</a>
+            <a href='/shop'>Achetez maintenant!</a>
           </li>
           <li>
-            <a href='/womens'>Femme</a>
+            <a href='/femmes'>Femmes</a>
           </li>
           <li>
-            <a href='/faqs'>FAQ</a>
+            <a href='/hommes'>Hommes</a>
           </li>
           <li>
-            <a href='/contact-us'>Contactez-nous</a>
+            <a href='/enfants'>Enfants</a>
           </li>
           <li>
-            <a href='/customer-services'>Services clients</a>
+            <a href='//contact'>Contactez-nous</a>
           </li>
-          <li>
-            <a href='/customer-support'>Support client</a>
-          </li>
-          <li>
-            <a href='/my-account'>Mon compte</a>
-          </li>
-          <li>
-            <a href='/checkout'>Caisse</a>
-          </li>
+          
+          
+          
+          
           <li>
             <a href='/cart'>Panier</a>
           </li>
           <li>
-            <a href='/order-tracking'>Suivi de commande</a>
+            <a href='/contact'>Suivi de commande</a>
           </li>
           <li>
-            <a href='/help-support'>Aide et support</a>
+            <a href='/contact'>Aide et support</a>
           </li>
         </ul>
       </div>
@@ -103,7 +100,7 @@ const Footer = () => {
       </div>
 
       <div className='footer-bottom'>
-        <p>© Xton est fièrement détenu par HiBootstrap</p>
+        <p>© Dieuf Dieul Couture</p>
       </div>
     </footer>
   )

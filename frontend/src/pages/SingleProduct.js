@@ -4,6 +4,8 @@ import {
   useCreateReviewMutation,
   useDeleteReviewMutation,
 } from '../slices/productApiSlice'
+import WhatsAppWidget from '../components/WhatsAppWidget'
+import 'react-whatsapp-widget/dist/index.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
@@ -15,14 +17,14 @@ import { FaHeart, FaMinus, FaPlus, FaTrash } from 'react-icons/fa'
 import FormatCurrency from '../components/FormatCurrency'
 import { toast } from 'react-toastify'
 import { useAddToWishlistMutation } from '../slices/wishApiSlice'
-import  Message  from '../components/Error'
+
 
 const SingleProduct = () => {
   const [qty, setQty] = useState(1)
   const [mainImage, setMainImage] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [selectedSize, setSelectedSize] = useState('')
-  const [activeTab, setActiveTab] = useState('description') // Active tab state
+  const [activeTab, setActiveTab] = useState('description') 
   const { id: productId } = useParams()
   const { userInfo } = useSelector((state) => state.auth)
   const [rating, setRating] = useState(0)
@@ -30,7 +32,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // Get product details from the API
+  const [showWhatsAppWidget, setShowWhatsAppWidget] = useState(false)
   const {
     data: product,
     refetch,
@@ -73,7 +75,7 @@ const SingleProduct = () => {
       await addToWishlist(productId).unwrap() // Call the mutation to add to wishlist
       toast.success('Product added to wishlist!')
     } catch (error) {
-      toast.error('Failed to add to wishlist. Please login.')
+      toast.error("Échec de l'ajout à la liste de souhaits. Veuillez vous connecter.")
     }
   }
 
@@ -107,7 +109,11 @@ const submitHandler = async (e) => {
     toast.error(error?.data?.message || error.error)
   }
 }
-
+const handleAddToCart = () => {
+  const message = `Je veux acheter ${product.name} x${qty} à ${product.price} FCFA`
+  const url = `https://wa.me/+221779258508?text=${encodeURIComponent(message)}`
+  window.open(url, '_blank')
+}
 
   if (loading) return <Loading />
   if (error) return <Error variant='danger'>{error}</Error>
@@ -245,12 +251,27 @@ const submitHandler = async (e) => {
             onClick={addToWishlistHandler}
             disabled={loadingAddToWishlist}
           >
-            <FaHeart /> Add to Wishlist
+            <FaHeart />
+            Ajouter à la liste de souhaits
           </button>
         </div>
+      </div>
+      <div className='whatsapp-container'>
+        {/* WhatsApp Button */}
+        <button onClick={handleAddToCart} className='whatsapp-btn'>
+          Acheter par WhatsApp
+        </button>
 
-       </div>
-
+        {/* WhatsApp Widget */}
+        {showWhatsAppWidget && (
+          <div className='whatsapp-widget'>
+            <WhatsAppWidget
+              phoneNumber='+221750132750'
+              message={`Je veux acheter ${product.name}`}
+            />
+          </div>
+        )}
+      </div>
       <div className='tabs'>
         <button
           onClick={() => handleTabClick('description')}

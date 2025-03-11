@@ -62,7 +62,7 @@ const Order = () => {
 
   return (
     <div className='order-screen'>
-      <h1 className='order-title'>ID de Commande : {order?._id}</h1>
+      <h5 className='order-title'>ID de Commande : {order?._id}</h5>
 
       <div className='order-details'>
         <div className='shipping-info'>

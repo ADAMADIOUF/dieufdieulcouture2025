@@ -7,7 +7,7 @@ import { clearCartItems } from '../slices/cartSlice'
 import { logout } from '../slices/authSlice'
 import { useLogoutMutation } from '../slices/userApiSlice'
 import SearchProduct from './SearchProduct'
-import logo from "../assets/logo.jpg"
+import logo from "../assets/logo2.png"
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -73,33 +73,6 @@ const Navbar = () => {
         </div>
 
         <CartButton />
-        {userInfo ? (
-          <div className='register-dropdown'>
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className='nav-user'
-            >
-              {userInfo.name}
-            </button>
-            {dropdownOpen && (
-              <div className='dropdown-user no-wrap'>
-                <Link to='/profile' className='dropdown-item'>
-                  <FaUser /> Profil
-                </Link>
-                <Link to='/wishlist' className='dropdown-item'>
-                  <FaHeart /> Liste de souhaits
-                </Link>
-                <button onClick={logoutHandler} className='dropdown-item'>
-                  Déconnexion
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <Link to='/login' className='nav-button'>
-            <FaUser /> Se connecter
-          </Link>
-        )}
       </div>
 
       <div className={`navbar-menu-mobile ${menuOpen ? 'open' : ''}`}>
@@ -171,7 +144,33 @@ const Navbar = () => {
           )}
         </div>
       )}
-
+      {userInfo ? (
+        <div className='register-dropdown'>
+          <button
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className='nav-user'
+          >
+            {userInfo.name}
+          </button>
+          {dropdownOpen && (
+            <div className='dropdown-user no-wrap'>
+              <Link to='/profile' className='dropdown-item'>
+                <FaUser /> Profil
+              </Link>
+              <Link to='/wishlist' className='dropdown-item'>
+                <FaHeart /> Liste de souhaits
+              </Link>
+              <button onClick={logoutHandler} className='dropdown-item'>
+                Déconnexion
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <Link to='/login' className='nav-button'>
+          <FaUser /> Se connecter
+        </Link>
+      )}
       <SearchProduct />
     </nav>
   )
