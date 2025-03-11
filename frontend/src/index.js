@@ -33,6 +33,8 @@ import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword'
 import ChildrenClothing from './clothings/ChildrenClothing'
 import Contact from './components/Contact'
+import Profile from './pages/Profile'
+import UserList from './dashboard/UserList'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -51,6 +53,7 @@ const router = createBrowserRouter(
       <Route path='/forgot-password' element={<ForgetPassword />} />
       <Route path='/reset-password/:token' element={<ResetPassword />} />
       <Route path='' element={<PrivateRoute />}>
+        <Route path='/profile' element={<Profile />} />
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/placeorder' element={<PlaceOrder />} />
         <Route path='/order/:id' element={<Order />} />
@@ -59,6 +62,7 @@ const router = createBrowserRouter(
       <Route path='' element={<AdminRoute />}>
         <Route path='/admin/productlist' element={<ProductListScreen />} />
         <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
+        <Route path='/admin/userlist' element={<UserList />} />
       </Route>
     </Route>
   )
