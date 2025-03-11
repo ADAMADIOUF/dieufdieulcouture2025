@@ -37,7 +37,7 @@ const contactSchema = new mongoose.Schema(
 
 contactSchema.post('save', async function (doc) {
   const emailOptions = {
-    to: 'adamadiouf2017@gmail.com', // Remplacé par le bon email
+    to: 'adamadiouf2017@gmail.com', 
     subject: 'New Contact Form Submission',
     message: `
       First Name: ${doc.firstName}
