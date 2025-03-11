@@ -4,8 +4,7 @@ import {
   useCreateReviewMutation,
   useDeleteReviewMutation,
 } from '../slices/productApiSlice'
-import WhatsAppWidget from '../components/WhatsAppWidget'
-import 'react-whatsapp-widget/dist/index.css'
+
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
@@ -32,7 +31,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [showWhatsAppWidget, setShowWhatsAppWidget] = useState(false)
+ 
   const {
     data: product,
     refetch,
@@ -110,7 +109,7 @@ const submitHandler = async (e) => {
   }
 }
 const handleAddToCart = () => {
-  const message = `Je veux acheter ${product.name} x${qty} à ${product.price} FCFA`
+  const message = `Je veux acheter ${product.name} x${qty} au prix de ${product.price} CFA`
   const url = `https://wa.me/+221779258508?text=${encodeURIComponent(message)}`
   window.open(url, '_blank')
 }
@@ -261,16 +260,6 @@ const handleAddToCart = () => {
         <button onClick={handleAddToCart} className='whatsapp-btn'>
           Acheter par WhatsApp
         </button>
-
-        {/* WhatsApp Widget */}
-        {showWhatsAppWidget && (
-          <div className='whatsapp-widget'>
-            <WhatsAppWidget
-              phoneNumber='+221750132750'
-              message={`Je veux acheter ${product.name}`}
-            />
-          </div>
-        )}
       </div>
       <div className='tabs'>
         <button
