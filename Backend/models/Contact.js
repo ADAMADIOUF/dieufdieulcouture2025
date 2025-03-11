@@ -31,30 +31,30 @@ const contactSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Ajoute automatiquement createdAt et updatedAt
   }
 )
 
 contactSchema.post('save', async function (doc) {
   const emailOptions = {
-    to: 'adamadiouf2017@gmail.com', 
-    subject: 'New Contact Form Submission',
+    to: 'pacowefor253@gmail.com',
+    subject: 'Nouvelle soumission du formulaire de contact',
     message: `
-      First Name: ${doc.firstName}
-      Last Name: ${doc.lastName}
-      Phone: ${doc.phone}
-      Description: ${doc.description}
-      Address: ${doc.address}
-      Total Price: ${doc.totalPrice}
-      Product Name: ${doc.productName}
+      Prénom : ${doc.firstName}
+      Nom : ${doc.lastName}
+      Téléphone : ${doc.phone}
+      Description : ${doc.description}
+      Adresse : ${doc.address}
+      Prix total : ${doc.totalPrice}
+      Nom du produit : ${doc.productName}
     `,
   }
 
   try {
     await sendEmail(emailOptions)
-    console.log('Notification email sent successfully.')
+    console.log('Email de notification envoyé avec succès.')
   } catch (error) {
-    console.error('Error sending notification email:', error)
+    console.error("Erreur lors de l'envoi de l'email de notification :", error)
   }
 })
 

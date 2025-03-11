@@ -10,7 +10,14 @@ export const contactApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    sendContactFormTwo: builder.mutation({
+      query: (data) => ({
+        url: `${CONTACT_URL}/contactForm`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 })
 
-export const { useSendContactFormMutation } = contactApiSlice
+export const { useSendContactFormMutation,useSendContactFormTwoMutation } = contactApiSlice

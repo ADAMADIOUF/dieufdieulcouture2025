@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSendContactFormMutation } from '../slices/contactApiSlice'
+import { useSendContactFormTwoMutation } from '../slices/contactApiSlice'
 import { useLocation } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { FaPhoneAlt, FaEnvelope, FaBuilding } from 'react-icons/fa'
@@ -16,7 +16,8 @@ const Contact = () => {
     message: '',
   })
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
-  const [sendContactForm, { isLoading, isError }] = useSendContactFormMutation()
+  const [sendContactForm, { isLoading, isError }] =
+    useSendContactFormTwoMutation()
 
   useEffect(() => {
     window.scrollTo(0, 0)
