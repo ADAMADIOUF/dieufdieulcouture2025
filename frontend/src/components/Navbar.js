@@ -71,7 +71,75 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-
+        {userInfo && userInfo.isAdmin && (
+          <div className='admin-dropdown'>
+            <button
+              onClick={toggleAdminDropdown}
+              className='admin-dropdown-toggle'
+            >
+              Admin
+            </button>
+            {adminDropdownOpen && (
+              <div className='admin-dropdown-menu no-wrap'>
+                <Link
+                  to='/admin/dashboard'
+                  className='admin-dropdown-item'
+                  onClick={() => setAdminDropdownOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  to='/admin/productlist'
+                  className='admin-dropdown-item'
+                  onClick={() => setAdminDropdownOpen(false)}
+                >
+                  Products
+                </Link>
+                <Link
+                  to='/admin/orderlist'
+                  className='admin-dropdown-item'
+                  onClick={() => setAdminDropdownOpen(false)}
+                >
+                  Orders
+                </Link>
+                <Link
+                  to='/admin/userlist'
+                  className='admin-dropdown-item'
+                  onClick={() => setAdminDropdownOpen(false)}
+                >
+                  Users
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
+        {userInfo ? (
+          <div className='register-dropdown'>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className='nav-user'
+            >
+              {userInfo.name}
+            </button>
+            {dropdownOpen && (
+              <div className='dropdown-user no-wrap'>
+                <Link to='/profile' className='dropdown-item'>
+                  <FaUser /> Profil
+                </Link>
+                <Link to='/wishlist' className='dropdown-item'>
+                  <FaHeart /> Liste de souhaits
+                </Link>
+                <button onClick={logoutHandler} className='dropdown-item'>
+                  Déconnexion
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link to='/login' className='nav-button'>
+            <FaUser /> Se connecter
+          </Link>
+        )}
         <CartButton />
       </div>
 
@@ -102,75 +170,7 @@ const Navbar = () => {
       <div className='navbar-icon' onClick={toggleMenu}>
         {menuOpen ? <FaTimes className='icon' /> : <FaBars className='icon' />}
       </div>
-      {userInfo && userInfo.isAdmin && (
-        <div className='admin-dropdown'>
-          <button
-            onClick={toggleAdminDropdown}
-            className='admin-dropdown-toggle'
-          >
-            Admin
-          </button>
-          {adminDropdownOpen && (
-            <div className='admin-dropdown-menu no-wrap'>
-              <Link
-                to='/admin/dashboard'
-                className='admin-dropdown-item'
-                onClick={() => setAdminDropdownOpen(false)}
-              >
-                Dashboard
-              </Link>
-              <Link
-                to='/admin/productlist'
-                className='admin-dropdown-item'
-                onClick={() => setAdminDropdownOpen(false)}
-              >
-                Products
-              </Link>
-              <Link
-                to='/admin/orderlist'
-                className='admin-dropdown-item'
-                onClick={() => setAdminDropdownOpen(false)}
-              >
-                Orders
-              </Link>
-              <Link
-                to='/admin/userlist'
-                className='admin-dropdown-item'
-                onClick={() => setAdminDropdownOpen(false)}
-              >
-                Users
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
-      {userInfo ? (
-        <div className='register-dropdown'>
-          <button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className='nav-user'
-          >
-            {userInfo.name}
-          </button>
-          {dropdownOpen && (
-            <div className='dropdown-user no-wrap'>
-              <Link to='/profile' className='dropdown-item'>
-                <FaUser /> Profil
-              </Link>
-              <Link to='/wishlist' className='dropdown-item'>
-                <FaHeart /> Liste de souhaits
-              </Link>
-              <button onClick={logoutHandler} className='dropdown-item'>
-                Déconnexion
-              </button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <Link to='/login' className='nav-button'>
-          <FaUser /> Se connecter
-        </Link>
-      )}
+
       <SearchProduct />
     </nav>
   )

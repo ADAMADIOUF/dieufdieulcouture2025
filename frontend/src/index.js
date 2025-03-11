@@ -31,6 +31,7 @@ import About from './components/About'
 import MenClothing from './clothings/MenClothing'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword'
+import ChildrenClothing from './clothings/ChildrenClothing'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
       <Route path='/shop' element={<Shop />} />
       <Route path='/femmes' element={<WomenClothing />} />
       <Route path='/hommes' element={<MenClothing />} />
+      <Route path='/enfants' element={<ChildrenClothing />} />
       <Route path='/product/:id' element={<SingleProduct />} />
       <Route path='/cart' element={<CartPage />} />
       <Route path='/login' element={<Login />} />
