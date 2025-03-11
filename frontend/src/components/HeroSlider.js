@@ -9,7 +9,7 @@ const slides = [
     description:
       'Découvrez nos créations uniques avec une touche de tradition et de modernité.',
     button: 'Voir Nos Services',
-    link: '/services',
+    link: '/about',
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const slides = [
     title: 'Qualité Artisanale',
     description: 'Chaque pièce est fabriquée avec soin et expertise.',
     button: 'Prendre Rendez-vous',
-    link: '/book',
+    link: '/contact',
   },
 ]
 

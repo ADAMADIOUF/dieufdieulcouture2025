@@ -46,16 +46,23 @@ const Partner = () => {
   }
 
   return (
-    <section className='partner-section'>
+    <section className='slider-container'>
       <div className='partner-title'>
         <h2>Nos Partenaires de Confiance</h2>
-        <p>Nous collaborons avec les meilleures marques pour offrir les meilleurs services.</p>
+        <p>
+          Nous collaborons avec les meilleures marques pour offrir les meilleurs
+          services.
+        </p>
       </div>
 
       <Slider {...settings} className='partner-slider'>
         {partners.map((partner) => (
           <div className='partner-item' key={partner.id}>
-            <img src={partner.logo} alt={partner.name} className='partner-logo' />
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              className='partner-logo'
+            />
           </div>
         ))}
       </Slider>

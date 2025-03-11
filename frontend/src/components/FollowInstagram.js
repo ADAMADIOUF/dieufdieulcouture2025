@@ -48,7 +48,7 @@ const FollowInstagram = () => {
   }
 
   return (
-    <div className='follow-instagram-container'>
+    <div className='slider-container'>
       {/* Title and Description */}
       <h2 className='slider-title'>Suivez nos comptes Instagram</h2>
       <p className='slider-description'>

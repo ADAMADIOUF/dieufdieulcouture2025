@@ -32,12 +32,14 @@ import MenClothing from './clothings/MenClothing'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword'
 import ChildrenClothing from './clothings/ChildrenClothing'
+import Contact from './components/Contact'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomePage />} />
       <Route path='/search/:keyword' element={<HomePage />} />
       <Route path='/about' element={<About />} />
+      <Route path='/contact' element={<Contact />} />
       <Route path='/shop' element={<Shop />} />
       <Route path='/femmes' element={<WomenClothing />} />
       <Route path='/hommes' element={<MenClothing />} />
