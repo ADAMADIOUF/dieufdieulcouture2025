@@ -35,6 +35,9 @@ import ChildrenClothing from './clothings/ChildrenClothing'
 import Contact from './components/Contact'
 import Profile from './pages/Profile'
 import UserList from './dashboard/UserList'
+import UserEdit from './dashboard/UserEdit'
+import OrderListScreen from './dashboard/OrderList'
+import DashboardScreen from './dashboard/Dashboard'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -60,9 +63,12 @@ const router = createBrowserRouter(
         <Route path='/wishlist' element={<WishList />} />
       </Route>
       <Route path='' element={<AdminRoute />}>
+        <Route path='/admin/dashboard' element={<DashboardScreen />} />
+        <Route path='/admin/orderlist' element={<OrderListScreen />} />
         <Route path='/admin/productlist' element={<ProductListScreen />} />
         <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
         <Route path='/admin/userlist' element={<UserList />} />
+        <Route path='/admin/user/:id/edit' element={<UserEdit />} />
       </Route>
     </Route>
   )

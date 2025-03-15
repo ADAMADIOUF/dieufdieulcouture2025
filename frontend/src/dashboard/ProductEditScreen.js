@@ -12,19 +12,20 @@ import Message from '../components/Error'
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams()
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState(0)
-  const [Oldprice, setOldPrice] = useState(0)
+  const [nom, setNom] = useState('')
+  const [prix, setPrix] = useState(0)
+  const [ancienPrix, setAncienPrix] = useState(0)
   const [images, setImages] = useState([])
-  const [brand, setBrand] = useState('')
-  const [category, setCategory] = useState('')
-  const [subcategory, setSubCategory] = useState('')
-  const [countInStock, setCountInStock] = useState(0)
+  const [marque, setMarque] = useState('')
+  const [categorie, setCategorie] = useState('')
+  const [sousCategorie, setSousCategorie] = useState('')
+  const [stock, setStock] = useState(0)
   const [description, setDescription] = useState('')
-   const [colors, setColors] = useState([])
-   const [sizes, setSizes] = useState([])
+  const [couleurs, setCouleurs] = useState([])
+  const [tailles, setTailles] = useState([])
+
   const {
-    data: product,
+    data: produit,
     isLoading,
     error,
   } = useGetproductDetailQuery(productId)
@@ -35,42 +36,42 @@ const ProductEditScreen = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (product) {
-      setName(product.name)
-      setPrice(product.price)
-      setOldPrice(product.Oldprice)
-      setImages(product.images)
-      setBrand(product.brand)
-      setCategory(product.category)
-      setSubCategory(product.subcategory)
-      setCountInStock(product.countInStock)
-      setDescription(product.description)
-      setColors(product.colors || [])
-      setSizes(product.sizes || [])
+    if (produit) {
+      setNom(produit.name)
+      setPrix(produit.price)
+      setAncienPrix(produit.Oldprice)
+      setImages(produit.images)
+      setMarque(produit.brand)
+      setCategorie(produit.category)
+      setSousCategorie(produit.subcategory)
+      setStock(produit.countInStock)
+      setDescription(produit.description)
+      setCouleurs(produit.colors || [])
+      setTailles(produit.sizes || [])
     }
-  }, [product])
+  }, [produit])
 
   const submitHandler = async (e) => {
     e.preventDefault()
-    const updatedProduct = {
+    const produitMisAJour = {
       productId,
-      name,
-      price,
-     Oldprice,
+      nom,
+      prix,
+      ancienPrix,
       images,
-      brand,
-      category,
-      subcategory,
-      countInStock,
+      marque,
+      categorie,
+      sousCategorie,
+      stock,
       description,
-      colors,
-      sizes,
+      couleurs,
+      tailles,
     }
-    const result = await updateProduct(updatedProduct)
+    const result = await updateProduct(produitMisAJour)
     if (result.error) {
       toast.error(result.error)
     } else {
-      toast.success('Product updated')
+      toast.success('Produit mis à jour')
       navigate('/admin/productlist')
     }
   }
@@ -92,17 +93,17 @@ const ProductEditScreen = () => {
   }
 
   const deleteImageHandler = (index) => {
-    const updatedImages = images.filter((_, i) => i !== index)
-    setImages(updatedImages)
+    const imagesMisesAJour = images.filter((_, i) => i !== index)
+    setImages(imagesMisesAJour)
   }
 
   return (
     <div className='edit-product-container'>
       <Link to={`/admin/productlist`} className='btn-back'>
-        Go Back
+        Retour
       </Link>
       <div className='edit-product-title'>
-        <h1>Edit Product</h1>
+        <h1>Modifier le produit</h1>
         {loadingUpdate && <Loader />}
         {isLoading ? (
           <Loader />
@@ -111,35 +112,35 @@ const ProductEditScreen = () => {
         ) : (
           <form onSubmit={submitHandler} className='edit-product-form'>
             <div className='form-group'>
-              <label htmlFor='name'>Name</label>
+              <label htmlFor='nom'>Nom</label>
               <input
                 type='text'
-                id='name'
-                placeholder='Enter name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id='nom'
+                placeholder='Entrez le nom'
+                value={nom}
+                onChange={(e) => setNom(e.target.value)}
                 required
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='price'>Price</label>
+              <label htmlFor='prix'>Prix</label>
               <input
                 type='number'
-                id='price'
-                placeholder='Enter price'
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                id='prix'
+                placeholder='Entrez le prix'
+                value={prix}
+                onChange={(e) => setPrix(e.target.value)}
                 required
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='price'>Old Price</label>
+              <label htmlFor='ancienPrix'>Ancien Prix</label>
               <input
                 type='number'
-                id='price'
-                placeholder='Enter price'
-                value={Oldprice}
-                onChange={(e) => setOldPrice(e.target.value)}
+                id='ancienPrix'
+                placeholder='Entrez l’ancien prix'
+                value={ancienPrix}
+                onChange={(e) => setAncienPrix(e.target.value)}
                 required
               />
             </div>
@@ -165,7 +166,7 @@ const ProductEditScreen = () => {
                         className='btn-delete'
                         onClick={() => deleteImageHandler(index)}
                       >
-                        Delete
+                        Supprimer
                       </button>
                     </div>
                   ))}
@@ -173,46 +174,46 @@ const ProductEditScreen = () => {
               )}
             </div>
             <div className='form-group'>
-              <label htmlFor='brand'>Brand</label>
+              <label htmlFor='marque'>Marque</label>
               <input
                 type='text'
-                id='brand'
-                placeholder='Enter brand'
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                id='marque'
+                placeholder='Entrez la marque'
+                value={marque}
+                onChange={(e) => setMarque(e.target.value)}
                 required
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='countInStock'>Count In Stock</label>
+              <label htmlFor='stock'>Stock</label>
               <input
                 type='number'
-                id='countInStock'
-                placeholder='Enter countInStock'
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
+                id='stock'
+                placeholder='Entrez la quantité en stock'
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
                 required
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='category'>Category</label>
+              <label htmlFor='categorie'>Catégorie</label>
               <input
                 type='text'
-                id='category'
-                placeholder='Enter category'
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                id='categorie'
+                placeholder='Entrez la catégorie'
+                value={categorie}
+                onChange={(e) => setCategorie(e.target.value)}
                 required
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='subCategory'>Subcategory</label>
+              <label htmlFor='sousCategorie'>Sous-catégorie</label>
               <input
                 type='text'
-                id='subCategory'
-                placeholder='Enter subcategory'
-                value={subcategory}
-                onChange={(e) => setSubCategory(e.target.value)}
+                id='sousCategorie'
+                placeholder='Entrez la sous-catégorie'
+                value={sousCategorie}
+                onChange={(e) => setSousCategorie(e.target.value)}
               />
             </div>
             <div className='form-group'>
@@ -220,38 +221,38 @@ const ProductEditScreen = () => {
               <input
                 type='text'
                 id='description'
-                placeholder='Enter description'
+                placeholder='Entrez la description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='colors'>Colors</label>
+              <label htmlFor='couleurs'>Couleurs</label>
               <input
                 type='text'
-                id='colors'
-                placeholder='Enter colors (comma-separated)'
-                value={colors.join(', ')}
+                id='couleurs'
+                placeholder='Entrez les couleurs (séparées par des virgules)'
+                value={couleurs.join(', ')}
                 onChange={(e) =>
-                  setColors(e.target.value.split(',').map((c) => c.trim()))
+                  setCouleurs(e.target.value.split(',').map((c) => c.trim()))
                 }
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='sizes'>Sizes</label>
+              <label htmlFor='tailles'>Tailles</label>
               <input
                 type='text'
-                id='sizes'
-                placeholder='Enter sizes (comma-separated)'
-                value={sizes.join(', ')}
+                id='tailles'
+                placeholder='Entrez les tailles (séparées par des virgules)'
+                value={tailles.join(', ')}
                 onChange={(e) =>
-                  setSizes(e.target.value.split(',').map((s) => s.trim()))
+                  setTailles(e.target.value.split(',').map((t) => t.trim()))
                 }
               />
             </div>
             <button type='submit' className='btn-update'>
-              Update
+              Mettre à jour
             </button>
           </form>
         )}

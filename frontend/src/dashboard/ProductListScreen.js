@@ -9,7 +9,6 @@ import {
   useDeleteProductMutation,
   useGetAllproductsQuery,
 } from '../slices/productApiSlice'
-import { useParams } from 'react-router-dom'
 
 const ProductListScreen = () => {
   const { data, isLoading, error, refetch } = useGetAllproductsQuery({})
@@ -20,11 +19,11 @@ const ProductListScreen = () => {
     useDeleteProductMutation()
 
   const deleteHandler = async (id) => {
-    if (window.confirm('Are you sure')) {
+    if (window.confirm('Êtes-vous sûr ?')) {
       try {
         await deleteProduct(id)
         refetch()
-        toast.success('Product deleted')
+        toast.success('Produit supprimé')
       } catch (error) {
         toast.error(error?.data?.message || error.error)
       }
@@ -32,7 +31,7 @@ const ProductListScreen = () => {
   }
 
   const createProductHandler = async () => {
-    if (window.confirm(`Are you sure you want to create a new product?`)) {
+    if (window.confirm('Êtes-vous sûr de vouloir créer un nouveau produit ?')) {
       try {
         await createProduct()
         refetch()
@@ -45,12 +44,12 @@ const ProductListScreen = () => {
   return (
     <>
       <div className='product-list-screen-header-container'>
-        <h1 className='product-list-screen-title'>Product</h1>
+        <h1 className='product-list-screen-title'>Produits</h1>
         <button
           className='product-list-screen-create-product-btn'
           onClick={createProductHandler}
         >
-          <FaEdit /> Create Product
+          <FaEdit /> Créer un produit
         </button>
       </div>
 
@@ -65,15 +64,15 @@ const ProductListScreen = () => {
           <div className='product-list-screen-container'>
             <div className='product-list-screen-header'>
               <div className='product-list-screen-product-id'>ID</div>
-              <div className='product-list-screen-product-name'>NAME</div>
-              <div className='product-list-screen-product-price'>PRICE</div>
+              <div className='product-list-screen-product-name'>NOM</div>
+              <div className='product-list-screen-product-price'>PRIX</div>
               <div className='product-list-screen-product-category'>
-                CATEGORY
+                CATÉGORIE
               </div>
               <div className='product-list-screen-product-subcategory'>
-                SUBCATEGORY
+                SOUS-CATÉGORIE
               </div>
-              <div className='product-list-screen-product-brand'>BRAND</div>
+              <div className='product-list-screen-product-brand'>MARQUE</div>
             </div>
             {data.products.map((product) => (
               <div

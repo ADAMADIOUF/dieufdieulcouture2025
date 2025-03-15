@@ -14,7 +14,7 @@ const App = () => {
       <ScrollToTop />
       <Outlet />
       <ToastContainer />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

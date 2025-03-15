@@ -12,11 +12,11 @@ const UserList = () => {
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation()
 
   const deleteHandler = async (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Êtes-vous sûr ?')) {
       try {
         await deleteUser(id)
         refetch()
-        toast.success('User deleted')
+        toast.success('Utilisateur supprimé')
       } catch (error) {
         toast.error(error?.data?.message || error.error)
       }
@@ -25,7 +25,7 @@ const UserList = () => {
 
   return (
     <div className='container'>
-      <h1>Users</h1>
+      <h1>Utilisateurs</h1>
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
@@ -36,13 +36,13 @@ const UserList = () => {
           {users.map((user) => (
             <div className='user-card' key={user._id}>
               <div className='user-info'>
-                <div>ID: {user._id}</div>
-                <div>Name: {user.name}</div>
+                <div>ID : {user._id}</div>
+                <div>Nom : {user.name}</div>
                 <div>
-                  Email: <a href={`mailto:${user.email}`}>{user.email}</a>
+                  Email : <a href={`mailto:${user.email}`}>{user.email}</a>
                 </div>
                 <div>
-                  Admin:{' '}
+                  Admin :{' '}
                   {user.isAdmin ? (
                     <FaCheck className='fa-check' />
                   ) : (
